@@ -29,18 +29,27 @@ Helper that can assist in using useful controls of View in MVVM patterns
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <control:PlaceHolderTextBox Grid.Row="0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Width="100"
-                                    PlaceHolderText="Input Contents..." 
-                                    Text="{Binding Name}"/>
+        <GroupBox Header="PlaceHolderTextBox"
+                  FontWeight="Bold"
+                  Grid.Row="0"
+                  Width="200"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+            <control:PlaceHolderTextBox Width="100"
+                                        PlaceHolderText="Input Contents..." 
+                                        Text="{Binding Name}"/>
+        </GroupBox>
 
-        <control:ColorPicker Grid.Row="1"
-                             Width="100"
-                             HorizontalAlignment="Center"/>
+        <GroupBox Header="ColorPicker"
+                  FontWeight="Bold"
+                  Grid.Row="1"
+                  Width="200"
+                  HorizontalAlignment="Center">
+            <control:ColorPicker Width="100"/>
+        </GroupBox>
     </Grid>
 </Window>
 ```
 
 ### Result
+![image](https://github.com/donpp237/ControlHelper/assets/137162873/77cca669-611f-4af1-aa1e-e09fda50a67f)
