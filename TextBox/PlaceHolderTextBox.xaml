@@ -6,13 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBox Panel.ZIndex="2" 
+        <TextBox x:Name="textBox" 
+                 Panel.ZIndex="2"
                  Background="Transparent"
-                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
+                 TextChanged="TextBoxTextChanged"/>
         
-        <TextBox x:Name="placeHolder"
+        <TextBox x:Name="placeHolderTextBox"
                  Panel.ZIndex="1"
-                 Foreground="LightGray"
-                 Text="{Binding PlaceHolderText}"/>
+                 Foreground="LightGray"/>
     </Grid>
 </UserControl>
