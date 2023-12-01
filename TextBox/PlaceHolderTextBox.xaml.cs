@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace ControlHelper
 {
@@ -26,25 +15,54 @@ namespace ControlHelper
             set => SetValue(TextProperty, value);
         }
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(PlaceHolderTextBox),
-                                                             new PropertyMetadata((obj, args) => ((PlaceHolderTextBox)(obj)).UpdatePlace()));
+                                                                 new FrameworkPropertyMetadata((obj, args) => ((PlaceHolderTextBox)obj).UpdateTextValue(obj))
+                                                                 {
+                                                                     BindsTwoWayByDefault = true,
+                                                                     DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                                                                 });
 
         public string PlaceHolderText
         {
             get => (string)GetValue(PlaceHolderTextProperty);
             set => SetValue(PlaceHolderTextProperty, value);
         }
-        public static readonly DependencyProperty PlaceHolderTextProperty = DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(PlaceHolderTextBox));
-
+        public static readonly DependencyProperty PlaceHolderTextProperty = DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(PlaceHolderTextBox),
+                                                                            new FrameworkPropertyMetadata((obj, args) => ((PlaceHolderTextBox)obj).UpdatePlaceHolderTextValue(obj))
+                                                                            {
+                                                                                BindsTwoWayByDefault = false
+                                                                            });
 
         public PlaceHolderTextBox()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
 
-        private void UpdatePlace()
+        private void UpdateTextValue(DependencyObject obj)
         {
-            placeHolder.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+            PlaceHolderTextBox ctrl = obj as PlaceHolderTextBox;
+            if (ctrl == null)
+                return;
+
+            ctrl.textBox.Text = ctrl.Text;
+        }
+
+        private void UpdatePlaceHolderTextValue(DependencyObject obj)
+        {
+            PlaceHolderTextBox ctrl = obj as PlaceHolderTextBox;
+            if (ctrl == null)
+                return;
+
+            ctrl.placeHolderTextBox.Text = ctrl.PlaceHolderText;
+        }
+
+        private void TextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var ctrl = sender as TextBox;
+            if (ctrl == null)
+                return;
+
+            SetValue(TextProperty, ctrl.Text);
+            placeHolderTextBox.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
