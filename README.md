@@ -27,6 +27,7 @@ Helper that can assist in using useful controls of View in MVVM patterns
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         
         <GroupBox Header="PlaceHolderTextBox"
@@ -40,9 +41,21 @@ Helper that can assist in using useful controls of View in MVVM patterns
                                         Text="{Binding Name}"/>
         </GroupBox>
 
-        <GroupBox Header="ColorPicker"
+        <GroupBox Header="OpenFileDialog"
                   FontWeight="Bold"
                   Grid.Row="1"
+                  Width="200"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+            <control:OpenFileDialog Filter="All|*" 
+                                    PathFindBtnName="..."
+                                    PlaceHolderText="../FileName.*"
+                                    Path="{Binding Name}"/>
+        </GroupBox>
+
+        <GroupBox Header="ColorPicker"
+                  FontWeight="Bold"
+                  Grid.Row="2"
                   Width="200"
                   HorizontalAlignment="Center">
             <control:ColorPicker Width="100"/>
@@ -52,4 +65,4 @@ Helper that can assist in using useful controls of View in MVVM patterns
 ```
 
 ### Result
-![image](https://github.com/donpp237/ControlHelper/assets/137162873/77cca669-611f-4af1-aa1e-e09fda50a67f)
+![image](https://github.com/donpp237/ControlHelper/assets/137162873/d25f7715-80a4-4fe4-8118-90c5e33b96eb)
